@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponseNotFound
+
 
 DATA = {
     'omlet': {
@@ -19,12 +21,16 @@ DATA = {
     # можете добавить свои рецепты ;)
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+
+def get_ingredients(request, dish):
+    ingredients = DATA.get(dish, {}).copy()
+    if not ingredients:
+        return HttpResponseNotFound("Dish not founded")
+    context = {}
+    servings = request.GET.get('servings', 0)
+    if servings:
+        if servings.isdigit():
+            for k, v in ingredients.items():
+                ingredients[k] = v * int(servings)
+    context['recipe'] = ingredients
+    return render(request, 'calculator/index.html', context)
