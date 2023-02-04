@@ -1,0 +1,11 @@
+GET http://127.0.0.1:8000/api/v1/products/
+Content-Type: application/json
+
+###
+POST http://127.0.0.1:8000/api/v1/products/
+Content-Type: application/json
+
+{
+    "title":"p_title1",
+    "description": "description1"
+}
