@@ -1,7 +1,7 @@
 # примеры API-запросов
 
 @baseUrl = http://localhost:8000/api
-@token1 = ac985e53e39ce8c9eb3c3ab608a2e2e23117f638
+@token1 = a5d9f2a1a65cd98cc5b38b84519d548f25b54489
 @token2 = c3a6ba52b3ca9c7f6aed7d96068cf42634857323
 # получение объявлений
 GET {{baseUrl}}/advertisements/
@@ -22,12 +22,12 @@ Authorization: Token {{token1}}
 ###
 
 # попытка поменять объявление
-PATCH {{baseUrl}}/advertisements/1/
+PATCH {{baseUrl}}/advertisements/9/
 Content-Type: application/json
 Authorization: Token {{token1}}
 
 {
-  "status": "CLOSED"
+  "status": "OPEN"
 }
 
 ###
@@ -58,7 +58,7 @@ Authorization: Token {{token2}}
 ###
 
 # фильтрация по создателю
-GET {{baseUrl}}/advertisements/?creator=1
+GET {{baseUrl}}/advertisements/?status=CLOSED
 Content-Type: application/json
 
 ###
